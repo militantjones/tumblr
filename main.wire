@@ -111,6 +111,11 @@
 
   <actions>
     <action name="onload" oninit="yes">
+      <sync>
+        {{#list itemlist}}
+          <assign property="var:{{name}}-array" value="[{{tags}}]" />
+        {{/list}}
+      </sync>
       <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
       <create class="data" target="CONTENT" />
     </action>
@@ -121,13 +126,13 @@
           <assign property="var:postCount" value="[eval:[var:postCount]+1]" />
           <create class="[datasource:tagGrab.[var:postCount].type]-item" target="C-DATA/feed" />
         </loop>
-        <translate xpos="-101%" time=".25" target="C-DATA/pull" />
+        <translate xpos="-101%" target="C-DATA/pull" />
         <assign property="var:postCount" value="" />
       </sync>
     </action>
     <action name="refresh">
       <sync>
-        <translate xpos="0" time=".25" target="C-DATA/pull" />
+        <translate xpos="0" target="C-DATA/pull" />
         <delete target="C-DATA/feed" />
         <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
       </sync>
@@ -145,6 +150,17 @@
       <translate xpos="0" time=".23" curve="easeout" target="CONTENT" />
       <translate xpos="0" time=".23" curve="easeout" target="MENU-BTN" />
       <set onclickup="showmenu" target="MENU-BTN" />
+    </action>
+    <action name="selection">
+      <if lhs="[var:currentSection]" operator="!=" rhs="_sectionTitle">
+        <sync>
+          <assign property="object:TOOLBAR/wrapper/label.text" value="_sectionTitle" />
+          <assign property="var:currentSection" value="_sectionTitle" />
+          <delete target="C-DATA" />
+          <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
+          <create class="data" target="CONTENT" />
+        </sync>
+      </if>
     </action>
   </actions>
 </wire>
