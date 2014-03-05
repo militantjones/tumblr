@@ -2,7 +2,7 @@
 
 <wire>
   <datasources>
-    <datasource name="tagGrab" source="" query="/response" providertype="json" querycomplete="build-feed" />
+    <datasource name="tagGrab" source="" query="/response" providertype="json" querycomplete="build-feed" datasourceerror="ds-error"/>
   </datasources>
 
   <styles>
@@ -14,9 +14,22 @@
       <style name="ios-toolbar" height="64" padding-top="20" />
       <style name="translucent" translucent="yes" />
     </platform>
+    <!-- theme 01 -->
+    <style name="toc-item-label" font="HelveticaNeue-Light" size="18" alignment="left" color="#eeeeee" leftinset="40" />
+    <style name="rule" background="#939293" alpha=".3" />
+
   </styles>
 
   <classes>
+    <class name="toc-item">
+      <panel name="[param:label]" width="100%" height="50" onclickup="tocselect" clickuptarget="VIEW" _sectionTitle="[param:label]">
+          <panel name="wrapper" width="100%" height="100%" padding-left="20">
+              <!-- <image name="icon" source="graphics/icon.settings.[param:icon].png" valign="center" /> -->
+              <text name="label" height="100%" width="100%" style="toc-item-label" text="[param:label]" />
+              <panel name="hr" width="100%" height="1" valign="bottom" style="rule" />
+          </panel>
+      </panel>
+    </class>
     <class name="feed-pull">
         <panel name="pull" width="100%" height="64">
             <wait name="object" width="100%" height="100%" color="#0a84c8" align="center" valign="center" />
@@ -100,8 +113,14 @@
           </panel>
         </panel>
       </panel>
-      <panel name="menu" alias="MENU" width="100%" height="" valign="bottom" background="#222222"></panel>
-      <panel name="content" alias="CONTENT" width="100%" height="[eval:[object:VIEW.height] - [object:TOOLBAR.height]]" valign="bottom" clip="yes"></panel>
+      <panel name="menu" alias="MENU" width="100%" height="[eval:[object:VIEW.height] - [object:TOOLBAR.height]]" valign="bottom" background="#222222" alpha="0">
+        <pager name="pager" width="100%" height="100%" orientation="vertical" paginate="no">
+          {{#list tumblrtags}}
+          <object class="toc-item" label="{{name}}" target="MENU/pager" />{{/list}}
+        </pager>
+      </panel>
+      <panel name="content" alias="CONTENT" width="100%" height="[eval:[object:VIEW.height] - [object:TOOLBAR.height]]" valign="bottom" clip="yes" background="#f4f4f4"></panel>
+
       <web name="launcher" alias="LAUNCHER" width="100%" height="100%" url="" alpha="0"/>
       <panel name="menu-btn" alias="MENU-BTN" width="50" height="50" valign="bottom" onclickup="showmenu">
         <panel name="inner-btn" alias="INNER-BTN" width="30" height="30" align="center" valign="center" background="efefef" shadowradius="3" shadowxoffset="1" shadowyoffset="1" shadowopacity=".4" cornerradius="4">
@@ -114,10 +133,23 @@
 
   <actions>
     <action name="onload" oninit="yes">
-      <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
+      <sync>
+        {{#list tumblrtags}}
+        <assign property="var:{{name}}-array" value="[eval:JSON.stringify('{{tags}}'.split(','))]" />{{/list}}
+        <assign property="var:arrayCount" value="0" />
+        <assign property="var:urlQuery" value="http://api.tumblr.com/v2/tagged?filter=raw&amp;api_key={{apikey}}" />
+        <loop lhs="[var:arrayCount]" operator="lte" rhs="[eval: [eval:'[var:{{tumblrtags.1.name}}-array]'.split(',').length] - 1 ]">
+          <assign property="var:urlQuery" value="[var:urlQuery]&amp;tag=[eval:JSON.parse('[var:{{tumblrtags.1.name}}-array]')[[var:arrayCount]]]" />
+          <assign property="var:arrayCount" value="[eval:[var:arrayCount]+1]" />
+        </loop>
+        <!-- <alert message="[eval:'[var:urlQuery]'.replace(/\s+/g, '');]" /> -->
+        <assign property="datasource:tagGrab.source" value="[eval:'[var:urlQuery]'.replace(/\s+/g, '');]"  />
+      </sync>
+
       <create class="data" target="CONTENT" />
     </action>
     <action name="build-feed">
+      <!-- <alert message="[datasource:tagGrab.dataSourceResultCount]" /> -->
       <sync>
         <create class="feed" target="C-DATA" />
         <loop lhs="[var:postCount]" operator="lt" rhs="[datasource:tagGrab.dataSourceResultCount]">
@@ -132,11 +164,13 @@
       <sync>
         <translate xpos="0" time=".25" target="C-DATA/pull" />
         <delete target="C-DATA/feed" />
-        <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
+        <assign property="datasource:tagGrab.source" value="[eval:'[var:urlQuery]'.replace(/\s+/g, '');]" />
       </sync>
     </action>
 
     <action name="showmenu">
+      <!--<translate xpos="90%" time=".23" curve="easeout" target="TOOLBAR" />-->
+      <alpha value="1" time="0" target="MENU" />
       <translate xpos="90%" time=".23" curve="easeout" target="CONTENT" />
       <translate xpos="72%" time=".23" curve="easeout" target="MENU-BTN" />
       <rotate time=".23" times="1" curve="easeout" degrees="45" axis="z" target="INNER-BTN" />
@@ -148,7 +182,11 @@
     </action>
 
     <action name="hidemenu">
-      <translate xpos="0" time=".23" curve="easeout" target="CONTENT" />
+      <!--<translate xpos="0" time=".23" curve="easeout" target="TOOLBAR" />-->
+      <sync>
+        <translate xpos="0" time=".23" curve="easeout" target="CONTENT" />
+        <alpha value="0" target="MENU" />
+      </sync>
       <translate xpos="0" time=".23" curve="easeout" target="MENU-BTN" />
       <set onclickup="showmenu" target="MENU-BTN" />
       <rotate time=".23" times="1" curve="easeout" degrees="-45" axis="z" target="INNER-BTN" />
@@ -156,6 +194,30 @@
         <alpha value="0" time=".1" target="INNER-BTN/arrow" />
         <alpha value="1" time=".07" target="INNER-BTN/burger" />
       </sync>
+      <translate xpos="0" time=".23" curve="easeout" target="MENU-BTN" />
+      <set onclickup="showmenu" target="MENU-BTN" />
+    </action>
+
+    <action name="tocselect">
+      <sync>
+        <assign property="object:TOOLBAR/wrapper/label.text" value="_sectionTitle" />
+        <assign property="var:currentSection" value="_sectionTitle" />
+        <assign property="var:arrayCount" value="0" />
+        <assign property="var:urlQuery" value="http://api.tumblr.com/v2/tagged?filter=raw&amp;api_key={{apikey}}" />
+        <loop lhs="[var:arrayCount]" operator="lte" rhs="[eval: [eval:'[var:[var:currentSection]-array]'.split(',').length] - 1 ]">
+          <assign property="var:urlQuery" value="[var:urlQuery]&amp;tag=[eval:JSON.parse('[var:[var:currentSection]-array]')[[var:arrayCount]]]" />
+          <assign property="var:arrayCount" value="[eval:[var:arrayCount]+1]" />
+        </loop>
+        <delete target="C-DATA" />
+        <create class="data" target="CONTENT" />
+        <!-- <alert message="[eval:'[var:urlQuery]'.replace(/\s+/g, '');]" /> -->
+        <assign property="datasource:tagGrab.source" value="[eval:'[var:urlQuery]'.replace(/\s+/g, '');]"  />
+        <play action="hidemenu" />
+      </sync>
+    </action>
+
+    <action name="ds-error">
+      <alert message="error?!" />
     </action>
   </actions>
 </wire>
