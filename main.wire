@@ -14,7 +14,7 @@
       <style name="ios-toolbar" height="64" padding-top="20" />
       <style name="translucent" translucent="yes" />
     </platform>
-  </styles> 
+  </styles>
 
   <classes>
     <class name="feed-pull">
@@ -102,6 +102,10 @@
       </panel>
       <panel name="content" alias="CONTENT" width="100%" height="[eval:[object:VIEW.height] - [object:TOOLBAR.height]]" valign="bottom"></panel>
       <web name="launcher" alias="LAUNCHER" width="100%" height="100%" url="" alpha="0"/>
+
+      <panel name="menu-btn" alias="MENU-BTN" width="50" height="50" valign="bottom" onclickup="showmenu">
+        <panel name="inner-btn" alias="INNER-BTN" width="30" height="30" align="center" valign="center" background="ff0000"></panel>
+      </panel>
     </panel>
   </main>
 
