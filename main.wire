@@ -14,7 +14,7 @@
       <style name="ios-toolbar" height="64" padding-top="20" />
       <style name="translucent" translucent="yes" />
     </platform>
-  </styles> 
+  </styles>
 
   <classes>
     <class name="feed-pull">
@@ -102,11 +102,20 @@
       </panel>
       <panel name="content" alias="CONTENT" width="100%" height="[eval:[object:VIEW.height] - [object:TOOLBAR.height]]" valign="bottom"></panel>
       <web name="launcher" alias="LAUNCHER" width="100%" height="100%" url="" alpha="0"/>
+
+      <panel name="menu-btn" alias="MENU-BTN" width="50" height="50" valign="bottom" onclickup="showmenu">
+        <panel name="inner-btn" alias="INNER-BTN" width="30" height="30" align="center" valign="center" background="ff0000"></panel>
+      </panel>
     </panel>
   </main>
 
   <actions>
     <action name="onload" oninit="yes">
+      <sync>
+        {{#list itemlist}}
+          <assign property="var:{{name}}-array" value="[{{tags}}]" />
+        {{/list}}
+      </sync>
       <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
       <create class="data" target="CONTENT" />
     </action>
@@ -117,16 +126,30 @@
           <assign property="var:postCount" value="[eval:[var:postCount]+1]" />
           <create class="[datasource:tagGrab.[var:postCount].type]-item" target="C-DATA/feed" />
         </loop>
-        <translate xpos="-101%" time=".25" target="C-DATA/pull" />
+        <translate xpos="-101%" target="C-DATA/pull" />
         <assign property="var:postCount" value="" />
       </sync>
     </action>
     <action name="refresh">
       <sync>
-        <translate xpos="0" time=".25" target="C-DATA/pull" />
+        <translate xpos="0" target="C-DATA/pull" />
         <delete target="C-DATA/feed" />
         <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
       </sync>
     </action>
+    <action name="selection">
+      <if lhs="[var:currentSection]" operator="!=" rhs="_sectionTitle">
+        <sync>
+          <assign property="object:TOOLBAR/wrapper/label.text" value="_sectionTitle" />
+          <assign property="var:currentSection" value="_sectionTitle" />
+          <delete target="C-DATA" />
+          <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
+          <create class="data" target="CONTENT" />
+        </sync>
+      </if>
+    </action>
+
+
+
   </actions>
 </wire>
