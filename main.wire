@@ -1,0 +1,31 @@
+<wire>
+   <datasources>
+
+      <!-- datasources go here -->
+
+   </datasources>
+
+   <styles>
+
+       <!-- styles go here -->
+
+   </styles>
+
+   <classes>
+
+        <!-- classes go here -->
+
+    </classes>
+
+    <main>
+
+        <!-- main wire hierarchy -->
+
+    </main>
+
+    <actions>
+
+        <!-- actions go here -->
+
+    </actions>
+</wire>
