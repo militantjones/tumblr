@@ -40,43 +40,43 @@
       </panel>
     </class>
     <class name="photo-item">
-      <panel name="item[var:postCount]" width="100%" height="200" background="#00ff00" padding-left="15" padding-right="15">
-        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].caption]|[datasource:tagGrab.[var:postCount].blog_name]|[datasource:tagGrab.[var:postCount].image_permalink]" />
+      <panel name="item[var:postCount]" width="100%" fitheight="yes" background="#555555" padding-left="15" padding-right="15">
+        <text name="text" height="fit" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].caption]|[datasource:tagGrab.[var:postCount].blog_name]|[datasource:tagGrab.[var:postCount].image_permalink]" />
       </panel>
     </class>
     <class name="text-item">
-      <panel name="item[var:postCount]" width="100%" height="200" background="#ffff00" padding-left="15" padding-right="15">
-        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].slug]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      <panel name="item[var:postCount]" width="100%" fitheight="yes" background="#ffff00" padding-left="15" padding-right="15">
+        <text name="text" height="fit" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].slug]|[datasource:tagGrab.[var:postCount].blog_name]" />
       </panel>
     </class>
     <class name="quote-item">
-      <panel name="item[var:postCount]" width="100%" height="200" background="#0000ff" padding-left="15" padding-right="15">
-        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].text]|[datasource:tagGrab.[var:postCount].source_url]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      <panel name="item[var:postCount]" width="100%" fitheight="yes" background="#0000ff" padding-left="15" padding-right="15">
+        <text name="text" height="fit" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].text]|[datasource:tagGrab.[var:postCount].source_url]|[datasource:tagGrab.[var:postCount].blog_name]" />
       </panel>
     </class>
     <class name="link-item">
-      <panel name="item[var:postCount]" width="100%" height="200" background="#ff00ff" padding-left="15" padding-right="15">
-        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].title]|[datasource:tagGrab.[var:postCount].description]|[datasource:tagGrab.[var:postCount].url]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      <panel name="item[var:postCount]" width="100%" fitheight="yes" background="#ff00ff" padding-left="15" padding-right="15">
+        <text name="text" height="fit" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].title]|[datasource:tagGrab.[var:postCount].description]|[datasource:tagGrab.[var:postCount].url]|[datasource:tagGrab.[var:postCount].blog_name]" />
       </panel>
     </class>
     <class name="chat-item">
-      <panel name="item[var:postCount]" width="100%" height="200" background="#ff0ff0" padding-left="15" padding-right="15">
-        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].title]|[datasource:tagGrab.[var:postCount].body]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      <panel name="item[var:postCount]" width="100%" fitheight="yes" background="#ff0ff0" padding-left="15" padding-right="15">
+        <text name="text" height="fit" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].title]|[datasource:tagGrab.[var:postCount].body]|[datasource:tagGrab.[var:postCount].blog_name]" />
       </panel>
     </class>
     <class name="audio-item">
-      <panel name="item[var:postCount]" width="100%" height="200" background="#00f00f" padding-left="15" padding-right="15">
-        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].caption]|[datasource:tagGrab.[var:postCount].player]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      <panel name="item[var:postCount]" width="100%" fitheight="yes" background="#00f00f" padding-left="15" padding-right="15">
+        <text name="text" height="fit" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].caption]|[datasource:tagGrab.[var:postCount].player]|[datasource:tagGrab.[var:postCount].blog_name]" />
       </panel>
     </class>
     <class name="video-item">
-      <panel name="item[var:postCount]" width="100%" height="200" background="#000fff" padding-left="15" padding-right="15">
-        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].caption]|[datasource:tagGrab.[var:postCount].player]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      <panel name="item[var:postCount]" width="100%" fitheight="yes" background="#000fff" padding-left="15" padding-right="15">
+        <text name="text" height="fit" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].caption]|[datasource:tagGrab.[var:postCount].player]|[datasource:tagGrab.[var:postCount].blog_name]" />
       </panel>
     </class>
     <class name="answer-item">
-      <panel name="item[var:postCount]" width="100%" height="200" background="#ff99ff" padding-left="15" padding-right="15">
-        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].question]|[datasource:tagGrab.[var:postCount].answer]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      <panel name="item[var:postCount]" width="100%" fitheight="yes" background="#ff99ff" padding-left="15" padding-right="15">
+        <text name="text" height="fit" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].question]|[datasource:tagGrab.[var:postCount].answer]|[datasource:tagGrab.[var:postCount].blog_name]" />
       </panel>
     </class>
   </classes>
@@ -100,22 +100,20 @@
           </panel>
         </panel>
       </panel>
-      <panel name="menu" alias="MENU" width="100%" height="[eval:[object:VIEW.height] - [object:TOOLBAR.height]]" valign="bottom" background="#222222"></panel>
+      <panel name="menu" alias="MENU" width="100%" height="" valign="bottom" background="#222222"></panel>
       <panel name="content" alias="CONTENT" width="100%" height="[eval:[object:VIEW.height] - [object:TOOLBAR.height]]" valign="bottom" clip="yes"></panel>
       <web name="launcher" alias="LAUNCHER" width="100%" height="100%" url="" alpha="0"/>
       <panel name="menu-btn" alias="MENU-BTN" width="50" height="50" valign="bottom" onclickup="showmenu">
-        <panel name="inner-btn" alias="INNER-BTN" width="30" height="30" align="center" valign="center" background="ff0000" cornerradius="4"></panel>
+        <panel name="inner-btn" alias="INNER-BTN" width="30" height="30" align="center" valign="center" background="efefef" shadowradius="3" shadowxoffset="1" shadowyoffset="1" shadowopacity=".4" cornerradius="4">
+          <image name="burger" source="graphics/burger-blue.png" width="24" height="24" align="center" valign="center"></image>
+          <image name="arrow" source="graphics/45chevron-blue.png" width="100%" height="100%" align="center" valign="center" alpha="0"></image>
+        </panel>
       </panel>
     </panel>
   </main>
 
   <actions>
     <action name="onload" oninit="yes">
-      <sync>
-        {{#list itemlist}}
-          <assign property="var:{{name}}-array" value="[{{tags}}]" />
-        {{/list}}
-      </sync>
       <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
       <create class="data" target="CONTENT" />
     </action>
@@ -126,41 +124,38 @@
           <assign property="var:postCount" value="[eval:[var:postCount]+1]" />
           <create class="[datasource:tagGrab.[var:postCount].type]-item" target="C-DATA/feed" />
         </loop>
-        <translate xpos="-101%" target="C-DATA/pull" />
+        <translate xpos="-101%" time=".25" target="C-DATA/pull" />
         <assign property="var:postCount" value="" />
       </sync>
     </action>
     <action name="refresh">
       <sync>
-        <translate xpos="0" target="C-DATA/pull" />
+        <translate xpos="0" time=".25" target="C-DATA/pull" />
         <delete target="C-DATA/feed" />
         <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
       </sync>
     </action>
 
     <action name="showmenu">
-      <!--<translate xpos="90%" time=".23" curve="easeout" target="TOOLBAR" />-->
       <translate xpos="90%" time=".23" curve="easeout" target="CONTENT" />
       <translate xpos="72%" time=".23" curve="easeout" target="MENU-BTN" />
+      <rotate time=".23" times="1" curve="easeout" degrees="45" axis="z" target="INNER-BTN" />
+      <sync>
+        <alpha value="0" time=".1" target="INNER-BTN/burger" />
+        <alpha value="1" time=".07" target="INNER-BTN/arrow" />
+      </sync>
       <set onclickup="hidemenu" target="MENU-BTN" />
     </action>
 
     <action name="hidemenu">
-      <!--<translate xpos="0" time=".23" curve="easeout" target="TOOLBAR" />-->
       <translate xpos="0" time=".23" curve="easeout" target="CONTENT" />
       <translate xpos="0" time=".23" curve="easeout" target="MENU-BTN" />
       <set onclickup="showmenu" target="MENU-BTN" />
-    </action>
-    <action name="selection">
-      <if lhs="[var:currentSection]" operator="!=" rhs="_sectionTitle">
-        <sync>
-          <assign property="object:TOOLBAR/wrapper/label.text" value="_sectionTitle" />
-          <assign property="var:currentSection" value="_sectionTitle" />
-          <delete target="C-DATA" />
-          <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
-          <create class="data" target="CONTENT" />
-        </sync>
-      </if>
+      <rotate time=".23" times="1" curve="easeout" degrees="-45" axis="z" target="INNER-BTN" />
+      <sync>
+        <alpha value="0" time=".1" target="INNER-BTN/arrow" />
+        <alpha value="1" time=".07" target="INNER-BTN/burger" />
+      </sync>
     </action>
   </actions>
 </wire>
