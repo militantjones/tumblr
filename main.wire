@@ -100,11 +100,11 @@
           </panel>
         </panel>
       </panel>
-      <panel name="content" alias="CONTENT" width="100%" height="[eval:[object:VIEW.height] - [object:TOOLBAR.height]]" valign="bottom"></panel>
+      <panel name="menu" alias="MENU" width="100%" height="[eval:[object:VIEW.height] - [object:TOOLBAR.height]]" valign="bottom" background="#222222"></panel>
+      <panel name="content" alias="CONTENT" width="100%" height="[eval:[object:VIEW.height] - [object:TOOLBAR.height]]" valign="bottom" clip="yes"></panel>
       <web name="launcher" alias="LAUNCHER" width="100%" height="100%" url="" alpha="0"/>
-
       <panel name="menu-btn" alias="MENU-BTN" width="50" height="50" valign="bottom" onclickup="showmenu">
-        <panel name="inner-btn" alias="INNER-BTN" width="30" height="30" align="center" valign="center" background="ff0000"></panel>
+        <panel name="inner-btn" alias="INNER-BTN" width="30" height="30" align="center" valign="center" background="ff0000" cornerradius="4"></panel>
       </panel>
     </panel>
   </main>
@@ -131,6 +131,20 @@
         <delete target="C-DATA/feed" />
         <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
       </sync>
+    </action>
+
+    <action name="showmenu">
+      <!--<translate xpos="90%" time=".23" curve="easeout" target="TOOLBAR" />-->
+      <translate xpos="90%" time=".23" curve="easeout" target="CONTENT" />
+      <translate xpos="72%" time=".23" curve="easeout" target="MENU-BTN" />
+      <set onclickup="hidemenu" target="MENU-BTN" />
+    </action>
+
+    <action name="hidemenu">
+      <!--<translate xpos="0" time=".23" curve="easeout" target="TOOLBAR" />-->
+      <translate xpos="0" time=".23" curve="easeout" target="CONTENT" />
+      <translate xpos="0" time=".23" curve="easeout" target="MENU-BTN" />
+      <set onclickup="showmenu" target="MENU-BTN" />
     </action>
   </actions>
 </wire>
