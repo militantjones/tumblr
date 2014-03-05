@@ -1,9 +1,7 @@
 <wire>
-   <datasources>
-
-      <!-- datasources go here -->
-
-   </datasources>
+  <datasources>
+    <datasource name="tagGrab" source="" query="/response" providertype="json" querycomplete="build-feed" />
+  </datasources>
 
   <styles>
     <platform device="iOS6">
@@ -16,39 +14,117 @@
     </platform>
   </styles> 
 
-   <classes>
+  <classes>
+    <class name="feed-pull">
+        <panel name="pull" width="100%" height="64">
+            <wait name="object" width="100%" height="100%" color="#0a84c8" align="center" valign="center" />
+        </panel>
+    </class>
+    <class name="feed-refresh">
+        <panel name="pull" width="100%" height="64" background="#dddddd">
+            <panel name="label" width="100%" height="100%" xpos="0%">
+                <text name="update" height="fit" width="100%" font="HelveticaNeue-Light" size="14" alignment="left" color="#333333" text="updating activity..." leftinset="15" ypos="20%" />
+                <text name="timestamp" height="fit" width="100%" bottomof="update" margin-top="5" font="HelveticaNeue-Light" size="14" alignment="left" color="#939293" text="last update: [eval:getTwitterTime('[eval:new Date().toUTCString()]')]" leftinset="15" />
+            </panel>
+        </panel>
+    </class>
+    <class name="feed">
+      <pager name="feed" width="100%" height="100%" orientation="vertical" paginate="no" onpull="refresh" pullto="64" pullclass="feed-pull" trigger="entry" />
+    </class>
+    <class name="data">
+      <panel name="c-data" alias="C-DATA" width="100%" height="100%">
+        <object class="feed-refresh" />
+        <object class="feed" />
+      </panel>
+    </class>
+    <class name="photo-item">
+      <panel name="item[var:postCount]" width="100%" height="200" background="#00ff00" padding-left="15" padding-right="15">
+        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].caption]|[datasource:tagGrab.[var:postCount].blog_name]|[datasource:tagGrab.[var:postCount].image_permalink]" />
+      </panel>
+    </class>
+    <class name="text-item">
+      <panel name="item[var:postCount]" width="100%" height="200" background="#ffff00" padding-left="15" padding-right="15">
+        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].slug]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      </panel>
+    </class>
+    <class name="quote-item">
+      <panel name="item[var:postCount]" width="100%" height="200" background="#0000ff" padding-left="15" padding-right="15">
+        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].text]|[datasource:tagGrab.[var:postCount].source_url]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      </panel>
+    </class>
+    <class name="link-item">
+      <panel name="item[var:postCount]" width="100%" height="200" background="#ff00ff" padding-left="15" padding-right="15">
+        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].title]|[datasource:tagGrab.[var:postCount].description]|[datasource:tagGrab.[var:postCount].url]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      </panel>
+    </class>
+    <class name="chat-item">
+      <panel name="item[var:postCount]" width="100%" height="200" background="#ff0ff0" padding-left="15" padding-right="15">
+        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].title]|[datasource:tagGrab.[var:postCount].body]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      </panel>
+    </class>
+    <class name="audio-item">
+      <panel name="item[var:postCount]" width="100%" height="200" background="#00f00f" padding-left="15" padding-right="15">
+        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].caption]|[datasource:tagGrab.[var:postCount].player]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      </panel>
+    </class>
+    <class name="video-item">
+      <panel name="item[var:postCount]" width="100%" height="200" background="#000fff" padding-left="15" padding-right="15">
+        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].caption]|[datasource:tagGrab.[var:postCount].player]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      </panel>
+    </class>
+    <class name="answer-item">
+      <panel name="item[var:postCount]" width="100%" height="200" background="#ff99ff" padding-left="15" padding-right="15">
+        <text height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" decode="yes" text="[datasource:tagGrab.[var:postCount].question]|[datasource:tagGrab.[var:postCount].answer]|[datasource:tagGrab.[var:postCount].blog_name]" />
+      </panel>
+    </class>
+  </classes>
 
-        <!-- classes go here -->
-
-    </classes>
-
-    <main>
-      <panel name="view" alias="VIEW" width="100%" height="100%" background="#f4f4f4">
-        <panel name="toolbar" alias="TOOLBAR" width="100%" style="ios-toolbar" background="#ffffff">
-          <panel name="wrapper" width="100%" height="100%" valign="bottom" clip="yes">
-            <text name="label" height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="center" color="#0a84c8" text="AppBox" />
-            <panel name="icon-left" width="44" height="44" alpha="0" xpos="15%" onclickup="null">
-              <image name="icon" source="graphics/icon.chevron.left.png" valign="center" ignoretouches="yes" xpos="15" />
-            </panel>
-            <panel name="icon-right" width="44" height="44" alpha="0" xpos="65%" onclickup="null" padding-right="15">
-              <image name="icon" source="graphics/icon.add.post.png" valign="center" align="right" ignoretouches="yes" contain="yes" />
-            </panel>
-            <panel name="post-cancel" width="100" height="100%" padding-left="15" alpha="0" onclickup="post-cancel" _type="">
-              <text name="label" height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" text="Cancel" />
-            </panel>
-            <panel name="post-submit" width="100" height="100%" padding-right="15" alpha="0" align="right" onclickup="null" _type="">
-              <text name="label" height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="right" color="#939293" text="Post" />
-            </panel>
+  <main>
+    <panel name="view" alias="VIEW" width="100%" height="100%" background="#f4f4f4">
+      <panel name="toolbar" alias="TOOLBAR" width="100%" style="ios-toolbar" background="#ffffff">
+        <panel name="wrapper" width="100%" height="100%" valign="bottom" clip="yes">
+          <text name="label" height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="center" color="#0a84c8" text="AppBox" />
+          <panel name="icon-left" width="44" height="44" alpha="0" xpos="15%" onclickup="null">
+            <image name="icon" source="graphics/icon.chevron.left.png" valign="center" ignoretouches="yes" xpos="15" />
+          </panel>
+          <panel name="icon-right" width="44" height="44" alpha="0" xpos="65%" onclickup="null" padding-right="15">
+            <image name="icon" source="graphics/icon.add.post.png" valign="center" align="right" ignoretouches="yes" contain="yes" />
+          </panel>
+          <panel name="post-cancel" width="100" height="100%" padding-left="15" alpha="0" onclickup="post-cancel" _type="">
+            <text name="label" height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="left" color="#0a84c8" text="Cancel" />
+          </panel>
+          <panel name="post-submit" width="100" height="100%" padding-right="15" alpha="0" align="right" onclickup="null" _type="">
+            <text name="label" height="100%" width="100%" font="HelveticaNeue-Light" size="18" alignment="right" color="#939293" text="Post" />
           </panel>
         </panel>
-        <panel name="content" alias="CONTENT" width="100%" height="[eval:[object:VIEW.height] - [object:TOOLBAR.height]]" valign="bottom"></panel>
-        <web name="launcher" alias="LAUNCHER" width="100%" height="100%" url="" alpha="0"/>
       </panel>
-    </main>
+      <panel name="content" alias="CONTENT" width="100%" height="[eval:[object:VIEW.height] - [object:TOOLBAR.height]]" valign="bottom"></panel>
+      <web name="launcher" alias="LAUNCHER" width="100%" height="100%" url="" alpha="0"/>
+    </panel>
+  </main>
 
-    <actions>
-
-        <!-- actions go here -->
-
-    </actions>
+  <actions>
+    <action name="onload" oninit="yes">
+      <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
+      <create class="data" target="CONTENT" />
+    </action>
+    <action name="build-feed">
+      <sync>
+        <create class="feed" target="C-DATA" />
+        <loop lhs="[var:postCount]" operator="lt" rhs="[datasource:tagGrab.dataSourceResultCount]">
+          <assign property="var:postCount" value="[eval:[var:postCount]+1]" />
+          <create class="[datasource:tagGrab.[var:postCount].type]-item" target="C-DATA/feed" />
+        </loop>
+        <translate xpos="-101%" time=".25" target="C-DATA/pull" />
+        <assign property="var:postCount" value="" />
+      </sync>
+    </action>
+    <action name="refresh">
+      <sync>
+        <translate xpos="0" time=".25" target="C-DATA/pull" />
+        <delete target="C-DATA/feed" />
+        <assign property="datasource:tagGrab.source" value="http://api.tumblr.com/v2/tagged?tag=black&amp;tag=dog&amp;filter=raw&amp;api_key=QZ3fSqIoCyhu7eSlXXepMeKfbswpOU6a8HDzzkefMmenxoPB8F" />
+      </sync>
+    </action>
+  </actions>
 </wire>
